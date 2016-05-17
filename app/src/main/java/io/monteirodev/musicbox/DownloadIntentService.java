@@ -9,7 +9,7 @@ public class DownloadIntentService extends IntentService {
     private static final String TAG = DownloadIntentService.class.getSimpleName();
 
     public DownloadIntentService() {
-        super("DownloadIntenService");
+        super("DownloadIntentService");
         // default is start_sticky but we need redelivery
         setIntentRedelivery(true);
     }
