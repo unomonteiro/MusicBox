@@ -1,5 +1,6 @@
 package io.monteirodev.musicbox;
 
+import android.content.Intent;
 import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -11,6 +12,7 @@ import android.widget.Toast;
 public class MainActivity extends AppCompatActivity {
 
     private static final String TAG = MainActivity.class.getSimpleName();
+    public static final String KEY_SONG = "song";
     private Button mDownloadbutton;
 
     @Override
@@ -18,9 +20,10 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        final DownloadThread thread = new DownloadThread();
+        // Thread
+        /*final DownloadThread thread = new DownloadThread();
         thread.setName("DownloadThread");
-        thread.start();
+        thread.start();*/
 
         mDownloadbutton = (Button) findViewById(R.id.downloadButton);
 
@@ -29,12 +32,20 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Toast.makeText(MainActivity.this, "Downloading", Toast.LENGTH_SHORT).show();
 
-                // send Messages to Handler for processing
+                // Thread
+                /*// send Messages to Handler for processing
                 for (String song : Playlist.songs) {
                     // android os keeps a pool of reusable messages
                     Message message = Message.obtain();
                     message.obj = song; // accepts any object
                     thread.mHandler.sendMessage(message);
+                }*/
+
+                // starting a service =~ activity
+                for (String song : Playlist.songs) {
+                    Intent intent = new Intent(MainActivity.this, DownloadService.class);
+                    intent.putExtra(KEY_SONG, song);
+                    startService(intent);
                 }
             }
         });
