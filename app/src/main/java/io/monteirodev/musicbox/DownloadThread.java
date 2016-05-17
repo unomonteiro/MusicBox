@@ -16,7 +16,7 @@ public class DownloadThread extends Thread {
     }
 
     private void downloadSong() {
-        // todo download song from internet
+        // simulating download song from internet
         // for this project were going to simulate a 10sec download
         long endTime = System.currentTimeMillis() + 10*1000;
         while (System.currentTimeMillis() < endTime) {
