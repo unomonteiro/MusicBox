@@ -23,22 +23,13 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Toast.makeText(MainActivity.this, "Downloading", Toast.LENGTH_SHORT).show();
-                downloadSong();
+
+                DownloadThread thread = new DownloadThread();
+                thread.setName("DownloadThread");
+                thread.start();
             }
         });
     }
 
-    private void downloadSong() {
-        // todo download song from internet
-        // for this project were going to simulate a 10sec download
-        long endTime = System.currentTimeMillis() + 10*1000;
-        while (System.currentTimeMillis() < endTime) {
-            try {
-                Thread.sleep(1000); // avoid run on every millisecond
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-        }
-        Log.d(TAG, "Song downloaded!");
-    }
+
 }
