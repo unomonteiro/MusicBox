@@ -23,6 +23,7 @@ public class DownloadService extends Service {
 
         }
         mHandler = thread.mHandler;
+        mHandler.setService(this);
     }
 
     @Override
@@ -30,7 +31,11 @@ public class DownloadService extends Service {
         String song = intent.getStringExtra(MainActivity.KEY_SONG);
         Message message = Message.obtain();
         message.obj = song;
+        // messages have two integer properties for use
+        message.arg1 = startId;
         mHandler.sendMessage(message);
+
+        // how to handle our service being killed, while it's still working
         return Service.START_REDELIVER_INTENT;
     }
 
