@@ -13,7 +13,7 @@ public class DownloadHandler extends Handler {
         //super.handleMessage(msg);
         downloadSong(msg.obj.toString());
 
-        // stopSelf would completly stop the DownloadService if no id is defined
+        // stopSelf would completely stop the DownloadService if no id is defined
         mService.stopSelf(msg.arg1);
     }
 
