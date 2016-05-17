@@ -1,5 +1,6 @@
 package io.monteirodev.musicbox;
 
+import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -17,6 +18,10 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        final DownloadThread thread = new DownloadThread();
+        thread.setName("DownloadThread");
+        thread.start();
+
         mDownloadbutton = (Button) findViewById(R.id.downloadButton);
 
         mDownloadbutton.setOnClickListener(new View.OnClickListener() {
@@ -24,9 +29,13 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Toast.makeText(MainActivity.this, "Downloading", Toast.LENGTH_SHORT).show();
 
-                DownloadThread thread = new DownloadThread();
-                thread.setName("DownloadThread");
-                thread.start();
+                // send Messages to Handler for processing
+                for (String song : Playlist.songs) {
+                    // android os keeps a pool of reusable messages
+                    Message message = Message.obtain();
+                    message.obj = song; // accepts any object
+                    thread.mHandler.sendMessage(message);
+                }
             }
         });
     }
