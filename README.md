@@ -1,4 +1,6 @@
 # MusicBox
 Threads  
-Services: onStartCommand, onBind  
+Services and lifecycle
 MediaPlayer
+*start
+*pause
