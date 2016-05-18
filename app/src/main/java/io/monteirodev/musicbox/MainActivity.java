@@ -1,10 +1,8 @@
 package io.monteirodev.musicbox;
 
 import android.content.Intent;
-import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
@@ -13,7 +11,8 @@ public class MainActivity extends AppCompatActivity {
 
     private static final String TAG = MainActivity.class.getSimpleName();
     public static final String KEY_SONG = "song";
-    private Button mDownloadbutton;
+    private Button mDownloadButton;
+    private Button mPlayButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,9 +24,10 @@ public class MainActivity extends AppCompatActivity {
         thread.setName("DownloadThread");
         thread.start();*/
 
-        mDownloadbutton = (Button) findViewById(R.id.downloadButton);
+        mDownloadButton = (Button) findViewById(R.id.downloadButton);
+        mPlayButton = (Button) findViewById(R.id.playButton);
 
-        mDownloadbutton.setOnClickListener(new View.OnClickListener() {
+        mDownloadButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Toast.makeText(MainActivity.this, "Downloading", Toast.LENGTH_SHORT).show();
@@ -50,6 +50,14 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
+
+        mPlayButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+
     }
 
 
