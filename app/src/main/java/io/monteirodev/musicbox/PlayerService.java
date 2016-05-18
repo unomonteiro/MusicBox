@@ -3,6 +3,7 @@ package io.monteirodev.musicbox;
 import android.app.Service;
 import android.content.Intent;
 import android.media.MediaPlayer;
+import android.os.Binder;
 import android.os.IBinder;
 import android.support.annotation.Nullable;
 import android.util.Log;
@@ -10,6 +11,7 @@ import android.util.Log;
 public class PlayerService extends Service {
     private static final String TAG = PlayerService.class.getSimpleName();
     private MediaPlayer mPlayer;
+    public IBinder mBinder = new LocalBinder();
 
     @Override
     public void onCreate() {
@@ -21,7 +23,7 @@ public class PlayerService extends Service {
     @Override
     public IBinder onBind(Intent intent) {
         Log.d(TAG, "onBind");
-        return null;
+        return mBinder;
     }
 
     @Override
@@ -36,7 +38,19 @@ public class PlayerService extends Service {
         mPlayer.release();
     }
 
+    /** Guives access to this service
+     * This is a IBinder because extends Binder which implements IBinder */
+    public class LocalBinder extends Binder {
+        public PlayerService getService(){
+            return PlayerService.this;
+        }
+    }
+
     // Client Methods
+    public boolean isPlaying(){
+        return mPlayer.isPlaying();
+    }
+
     public void  play(){
         mPlayer.start();
     }

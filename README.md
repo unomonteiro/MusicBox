@@ -1,6 +1,7 @@
 # MusicBox
-Threads  
-Services and lifecycle
-MediaPlayer
-*start
-*pause
+- Threads
+- Services and lifecycle
+- IBinder
+- MediaPlayer
+--start
+--pause
