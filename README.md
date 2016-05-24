@@ -1,8 +1,10 @@
 # MusicBox
+- Lifecycle
 - Threads
-- Services and lifecycle
+- Services
+- Processes
 - IBinder
 - MediaPlayer
---start
---pause
--Processes
+  - start
+  - pause
+- Notifications
